@@ -1,0 +1,13 @@
+{
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "packageNames": [
+        "@typescript-eslint/parser",
+        "eslint-config-airbnb",
+        "eslint-config-airbnb-base"
+      ],
+      "rangeStrategy": "replace"
+    }
+  ]
+}
