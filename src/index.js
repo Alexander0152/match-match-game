@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 import './style.css';
 
 import Icon from './Switzerland.jpg';
@@ -15,11 +15,7 @@ function component() {
     const myIcon = new Image();
 
     myIcon.src = Icon;
-
-
     element.appendChild(myIcon);
-
-
     return element;
 }
 
