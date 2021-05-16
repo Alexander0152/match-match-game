@@ -1,4 +1,7 @@
 .hello {
   color: red;
-  background: url('./Switzerland.jpg');
+  /* background: url('./Switzerland.jpg'); */
+}
+.myClass {
+  color: chartreuse;
 }
