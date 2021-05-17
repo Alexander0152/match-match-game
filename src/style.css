@@ -119,12 +119,14 @@ button {
   background-color: rgba(0, 0, 0, 0.05);
   margin: 0 auto;
   margin-top: 33px;
-  padding-top: 28px;
-  padding-left: 36px;
+  /* padding-top: 28px;
+  padding-left: 36px; */
+  padding: 28px 36px 85px 36px;
   border-radius: 5px;
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .title {
@@ -142,13 +144,59 @@ button {
 
 .how_to_play_register {
   width: 780px;
-  height: 230px;
+  height: 200px;
   display: flex;
-  background-color: #1e88e5;
+  justify-content: space-between;
 }
 
-.register_block {
+.step_block {
   width: 360px;
-  height: 230px;
+  height: 168px;
   background-color: #ffffff;
+  padding: 16px;
+  display: flex;
+}
+
+.step_block_title {
+  margin-left: 16px;
+  /* height: 20px; */
+  width: 272px;
+  margin-top: 0px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}
+
+.number_box {
+  width: 40px;
+  height: 40px;
+  background-color: #2196f3;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.number_box_digit {
+  margin: auto;
+  color: #f2f9fe;
+  font-size: 22px;
+}
+
+.picture_block {
+  width: 302px;
+  height: 100%;
+}
+
+.register_form {
+  width: 90%;
+  height: 90%;
+  background-color: red;
+}
+
+.reg_form_title {
+  margin-top: 0;
+  width: 100%;
+  height: 10%;
+  background-color: #f2f9fe;
 }
