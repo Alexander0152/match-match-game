@@ -1,7 +1,154 @@
-.hello {
-  color: red;
-  /* background: url('./Switzerland.jpg'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+body {
+  font-family: Roboto;
 }
-.myClass {
-  color: chartreuse;
+
+header {
+  width: 100%;
+  background-color: #2196f3;
+}
+
+.wrapper {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.header_content {
+  height: 64px;
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 80px;
+  height: 40px;
+  background-image: url(assets/icons/match_logo.png);
+  background-size: cover;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn_register {
+  width: 207px;
+  height: 36px;
+  background-color: #f2f9fe;
+  color: #2196f3;
+  font-style: Medium;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 5px;
+}
+
+.navbar {
+  display: flex;
+  width: 288px;
+  height: 100%;
+  justify-content: space-between;
+  list-style-type: none;
+  margin-right: 669px;
+}
+
+.navbar li {
+  width: 96px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navbar a {
+  color: #ffffff;
+  font-family: Roboto;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: none;
+}
+
+.nav_icon {
+  margin-top: 11px;
+  margin-left: 38px;
+  margin-bottom: 9px;
+}
+
+.navbar_about,
+.navbar_best,
+.navbar_settings {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(assets/icons/question.png);
+  border-radius: 50%;
+}
+
+.navbar_best {
+  background-image: url(assets/icons/star.svg);
+}
+
+.navbar_settings {
+  background-image: url(assets/icons/settings.png);
+}
+
+.navbar_active {
+  background-color: #1e88e5;
+}
+
+.navbar_text {
+  width: 96px;
+  height: 15px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/*****HOW TO PLAY***********************************/
+
+.how_to_play {
+  width: 964px;
+  height: 774px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+  margin-top: 33px;
+  padding-top: 28px;
+  padding-left: 36px;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-style: Medium;
+  font-size: 20px;
+  line-height: 30px;
+  vertical-align: Center;
+  letter-spacing: 0.15px;
+  font-weight: bold;
+}
+
+.how_to_play_title {
+  margin-bottom: 20px;
+}
+
+.how_to_play_register {
+  width: 780px;
+  height: 230px;
+  display: flex;
+  background-color: #1e88e5;
+}
+
+.register_block {
+  width: 360px;
+  height: 230px;
+  background-color: #ffffff;
 }

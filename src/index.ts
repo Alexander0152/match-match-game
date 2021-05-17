@@ -1,5 +1,5 @@
-import App from './app/app';
+import Header from './presentationLayer/header';
 
 const rootNode = document.querySelector('#root');
 
-new App(rootNode).render();
+new Header(rootNode).render();
