@@ -52,7 +52,8 @@ button {
   margin-right: 669px;
 }
 
-.navbar li {
+.navbar li,
+.picture_settings {
   width: 96px;
   height: 100%;
   display: flex;
@@ -115,7 +116,7 @@ button {
 
 .how_to_play {
   width: 964px;
-  height: 774px;
+  height: 689px;
   background-color: rgba(0, 0, 0, 0.05);
   margin: 0 auto;
   margin-top: 33px;
@@ -144,14 +145,14 @@ button {
 
 .how_to_play_register {
   width: 780px;
-  height: 200px;
+  height: 180px;
   display: flex;
   justify-content: space-between;
 }
 
 .step_block {
   width: 360px;
-  height: 168px;
+  height: 148px;
   background-color: #ffffff;
   padding: 16px;
   display: flex;
@@ -188,15 +189,85 @@ button {
   height: 100%;
 }
 
+/******REGISTRY FORM***************/
+
 .register_form {
-  width: 90%;
-  height: 90%;
-  background-color: red;
+  width: 639px;
+  height: 460px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 .reg_form_title {
-  margin-top: 0;
+  margin: 0;
   width: 100%;
-  height: 10%;
+  height: 27px;
   background-color: #f2f9fe;
+  padding: 20px;
+}
+
+.picture_settings {
+  height: 64px;
+  float: right;
+  background-color: #2196f3;
+}
+
+.form-conteiner {
+  width: 100%;
+  height: 100%;
+  background-color: #fafafa;
+  padding: 33px 20px 26px 21px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-content {
+  display: flex;
+}
+
+.form-input {
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reg_input {
+  width: 328px;
+  height: 56px;
+  margin-bottom: 16px;
+  background-color: rgba(33, 33, 33, 0.08);
+  border-radius: 4px;
+  font-size: 16px;
+  border-bottom: 3px solid black;
+}
+
+.avatar-container {
+  width: 198px;
+  height: 198px;
+  background-image: url(assets/icons/avatar.svg);
+  margin-left: 38px;
+}
+
+.form-btn-panel {
+  display: flex;
+  height: 36px;
+  width: 100%;
+  margin-top: 50px;
+  padding-left: 380px;
+}
+
+.btn_add_user {
+  background-color: #2196f3;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-right: 17px;
+}
+
+.btn_cansel {
+  color: #2196f3;
+  background-color: #e3f2fd;
+  font-weight: bold;
+  border-radius: 6px;
 }

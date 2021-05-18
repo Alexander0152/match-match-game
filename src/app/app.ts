@@ -10,7 +10,6 @@ export default class App implements Component {
   }
 
   render(): HTMLElement {
-    // this.application.innerHTML = 'hello from App';
     this.application.innerHTML = `
     <div class='myClass'>
       <h1>HELL</h1>
