@@ -148,6 +148,7 @@ button {
   height: 180px;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .step_block {
@@ -189,6 +190,13 @@ button {
   height: 100%;
 }
 
+.form_picture {
+  background-image: url(assets/images/form.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 230px;
+  margin-top: -69px;
+}
 /******REGISTRY FORM***************/
 
 .register_form {

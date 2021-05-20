@@ -1,4 +1,4 @@
-import { Component, RootElement } from './app.api';
+import { Component, RootElement } from '../businessLayer/app.api';
 
 export default class Header implements Component {
   private readonly application: HTMLDivElement;
@@ -17,8 +17,7 @@ export default class Header implements Component {
         </div>
         <p class="step_block_title">Register new playerin game</p>
       </div>
-      <div class="picture_block">
-      </div>
+      <div class="picture_block form_picture"></div>
     </section>
     <section class="how_to_play_register">
       <div class="step_block">

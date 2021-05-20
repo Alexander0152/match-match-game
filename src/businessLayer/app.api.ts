@@ -3,3 +3,5 @@ export interface Component {
 }
 
 export type RootElement = HTMLElement | null | Element;
+
+export type RouterOptions = { mode: string; root: string };
