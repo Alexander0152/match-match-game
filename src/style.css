@@ -281,6 +281,20 @@ button {
   border-radius: 6px;
 }
 
+input:not(:placeholder-shown):invalid {
+  border: solid red;
+  box-shadow: 0 0 3px 2px red;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+input:valid {
+  border: solid green;
+  box-shadow: 0 0 3px 2px green;
+}
+
 /****GAME SETTINGS***********************/
 
 .settings {

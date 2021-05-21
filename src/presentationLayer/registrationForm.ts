@@ -7,6 +7,8 @@ export default class RegistrationForm implements Component {
     this.application = document.createElement('div');
   }
 
+  checkFirstName(value: string) {}
+
   render(): HTMLElement {
     this.root.innerHTML = `    <form class="register_form">
     <p class="title reg_form_title">Register new player</p>
@@ -47,11 +49,18 @@ export default class RegistrationForm implements Component {
         <div class="avatar-container"></div>
       </div>
       <div class="form-btn-panel">
-        <button type="submit" class="btn_add_user">ADD USER</button>
+        <button id="btnAddUser" type="submit" class="btn_add_user">ADD USER</button>
         <button type="reset" class="btn_cansel">CANCEL</button>
       </div>
     </div>
   </form>`;
+
+    const firstNameField = <HTMLInputElement>document.querySelector('#firstName');
+    const lastNameField = <HTMLInputElement>document.querySelector('#lastName');
+    const emailField = <HTMLInputElement>document.querySelector('#email');
+
+    firstNameField.addEventListener('input', () => this.checkFirstName(firstNameField.value));
+
     return this.application;
   }
 }
