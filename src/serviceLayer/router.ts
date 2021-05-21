@@ -1,38 +1,55 @@
-import { RootElement } from '../app/app.api';
 import { RouterOptions } from '../businessLayer/app.api';
-import Header from '../presentationLayer/header';
+import GameSettings from '../presentationLayer/gameSettings';
+import HowToPlay from '../presentationLayer/howToPlay';
 import RegistrationForm from '../presentationLayer/registrationForm';
+import BestScore from './bestScore';
 
 class Router {
   private readonly application: HTMLDivElement;
 
+  tabs = document.getElementsByClassName('tab');
+
   constructor(private readonly root: Element) {
     this.application = document.createElement('div');
-    // window.history.pushState({}, pathname, window.location.origin + pathname);
-    // this.application.innerHTML = `<h1>Hello</h1>`;
-    // this.application.innerHTML = this.routes[window.location.pathname];
   }
 
-  routes = {
-    '/about_game': `<h1>About</h1>`,
-    '/best_score': `<h1>Best</h1>`,
-    '/game_settings': `<h1>Score</h1>`,
-  };
+  // routes = {
+  //   '/about_game': new RegistrationForm(this.root).render(),
+  //   '/best_score': `<h1>Best</h1>`,
+  //   '/game_settings': `<h1>Settings</h1>`,
+  // };
+
+  changeActive(pathname: string) {
+    for (let i = 0; i < this.tabs.length; i += 1) {
+      this.tabs[i].classList.remove('navbar_active');
+    }
+    document.querySelector(`a[href='${pathname}']`).classList.add('navbar_active');
+  }
 
   onNavigate = (pathname: string) => {
-    window.history.pushState({}, pathname, window.location.origin + pathname);
+    // window.history.pushState(null, null, '#' + pathname);
 
-    if (pathname === '/about_game') {
-      this.root.innerHTML = this.routes['/about_game'];
-    } else {
-      this.root.innerHTML = this.routes['/best_score'];
+    switch (pathname) {
+      case '/#/about_game':
+        new HowToPlay(this.root).render();
+        break;
+      case '/#/best_score':
+        new BestScore(this.root).render();
+        break;
+      case '/#/game_settings':
+        new GameSettings(this.root).render();
+        break;
+      default:
+        new RegistrationForm(this.root).render();
+        break;
     }
-    console.log(window.location.pathname);
+    this.changeActive(pathname);
 
-    window.onpopstate = () => {
-      this.root.innerHTML = this.routes['/about_game'];
-    };
-    return this.application;
+    // window.onpopstate = () => {
+    //   new HowToPlay(this.root).render();
+    //   // this.getRoute(window.location.origin);
+    // };
+    // return this.application;
   };
 }
 

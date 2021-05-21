@@ -8,7 +8,7 @@ export default class RegistrationForm implements Component {
   }
 
   render(): HTMLElement {
-    this.application.innerHTML = `<form class="register_form">
+    this.root.innerHTML = `    <form class="register_form">
     <p class="title reg_form_title">Register new player</p>
     <div class="form-conteiner">
       <div class="form-content">
@@ -19,6 +19,9 @@ export default class RegistrationForm implements Component {
             id="firstName"
             name="firstName"
             placeholder="First name"
+            required
+            minlength="1"
+            maxlength="30"
           />
           <input
             class="reg_input"
@@ -26,20 +29,29 @@ export default class RegistrationForm implements Component {
             id="lastName"
             name="lastName"
             placeholder="Last name"
+            required
+            minlength="1"
+            maxlength="30"
           />
-          <input class="reg_input" type="email" id="email" name="email" placeholder="Email" />
+          <input
+            class="reg_input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            minlength="1"
+            maxlength="30"
+          />
         </div>
         <div class="avatar-container"></div>
       </div>
       <div class="form-btn-panel">
-        <button class="btn_add_user">ADD USER</button>
-        <button class="btn_cansel">CANCEL</button>
+        <button type="submit" class="btn_add_user">ADD USER</button>
+        <button type="reset" class="btn_cansel">CANCEL</button>
       </div>
     </div>
   </form>`;
-    if (this.root) {
-      this.root.appendChild(this.application);
-    }
     return this.application;
   }
 }

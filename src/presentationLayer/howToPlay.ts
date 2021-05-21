@@ -1,6 +1,6 @@
 import { Component, RootElement } from '../businessLayer/app.api';
 
-export default class Header implements Component {
+export default class HowToPlay implements Component {
   private readonly application: HTMLDivElement;
 
   constructor(private readonly root: RootElement) {
@@ -8,7 +8,7 @@ export default class Header implements Component {
   }
 
   render(): HTMLElement {
-    this.application.innerHTML = `<div class="how_to_play">
+    this.root.innerHTML = `<div class="how_to_play">
     <p class="how_to_play_title title">How to play?</p>
     <section class="how_to_play_register">
       <div class="step_block">
@@ -44,10 +44,6 @@ export default class Header implements Component {
       </div>
     </section>
   </div>`;
-
-    if (this.root) {
-      this.root.appendChild(this.application);
-    }
     return this.application;
   }
 }

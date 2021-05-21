@@ -6,57 +6,18 @@ import Router from './serviceLayer/router';
 const rootNode = document.querySelector('#root');
 new Header(rootNode).render();
 const content = document.querySelector('#content');
+new HowToPlay(content).render();
 
 const btnAboutGame = document.querySelector('#btnAboutGame');
 const btnBestScore = document.querySelector('#btnBestScore');
 const btnGameSettings = document.querySelector('#btnGameSettings');
+const btnRegistry = document.querySelector('#btnRegistry');
 
-function navigate() {
-  new Router(content).onNavigate('/about_game');
+function navigate(pathname: string) {
+  new Router(content).onNavigate(pathname);
 }
 
-function navigate1() {
-  new Router(content).onNavigate('/about1_game');
-}
-
-// window.history.pushState({}, pathname, window.location.origin + pathname);
-
-// window.onpopstate = () => {
-//   this.root.innerHTML = this.routes[window.location.pathname];
-// };
-
-btnAboutGame.addEventListener('click', navigate);
-btnBestScore.addEventListener('click', navigate1);
-btnGameSettings.addEventListener('click', navigate);
-// new HowToPlay(rootNode).render();
-
-// const router: Router = new Router(rootNode);
-
-// function onNavigate(pathname: string): boolean {
-//   alert('dec');
-//   // router.onNavigate(pathname);
-//   return true;
-// }
-// new RegistrationForm(rootNode).render();
-
-// router: Router;
-
-// const router = new Router({
-//   mode: 'hash',
-//   root: '/',
-// });
-
-// router
-//   .add('/about/', () => {
-//     alert('welcome in about page');
-//     return true;
-//   })
-//   .add('/about1/', () => {
-//     alert('welcome in about page');
-//     return true;
-//   })
-//   .add('', () => {
-//     // general controller
-//     console.log('welcome in catch all controller');
-//     return true;
-//   });
+btnAboutGame.addEventListener('click', () => navigate(btnAboutGame.getAttribute('href')));
+btnBestScore.addEventListener('click', () => navigate(btnBestScore.getAttribute('href')));
+btnGameSettings.addEventListener('click', () => navigate(btnGameSettings.getAttribute('href')));
+btnRegistry.addEventListener('click', () => navigate(btnRegistry.getAttribute('href')));

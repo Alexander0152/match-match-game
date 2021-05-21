@@ -128,6 +128,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  pointer-events: none;
 }
 
 .title {
@@ -202,7 +203,7 @@ button {
 .register_form {
   width: 639px;
   height: 460px;
-  margin: 0 auto;
+  margin: 150px auto;
   overflow: hidden;
   box-shadow: 1px 1px 1px 1px black;
 }
@@ -278,4 +279,44 @@ button {
   background-color: #e3f2fd;
   font-weight: bold;
   border-radius: 6px;
+}
+
+/****GAME SETTINGS***********************/
+
+.settings {
+  width: 1000px;
+  height: 252px;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.24);
+  margin: 50px auto;
+  padding: 46px;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings_label {
+  font-style: Medium;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.settings-form select {
+  width: 256px;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+
+/***BEST SCORE****************/
+
+.score {
+  width: 900px;
+  height: 710px;
+  padding: 10px 55px 20px 55px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin: 47px auto;
+  display: flex;
+  flex-direction: column;
 }
