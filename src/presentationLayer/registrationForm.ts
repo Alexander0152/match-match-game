@@ -1,4 +1,5 @@
 import { Component, RootElement } from '../businessLayer/app.api';
+import User from '../businessLayer/user';
 
 export default class RegistrationForm implements Component {
   private readonly application: HTMLDivElement;
@@ -7,10 +8,41 @@ export default class RegistrationForm implements Component {
     this.application = document.createElement('div');
   }
 
-  checkFirstName(value: string) {}
+  static checkName(field: HTMLInputElement): void {
+    const fieldLength = field.value.length;
+    const fieldValue: string = field.value;
+
+    if (fieldLength === 0 || fieldLength > 30) {
+      field.setCustomValidity('Value can not be ampty or longer then 30 symbols!');
+      return;
+    }
+    field.setCustomValidity('');
+
+    const hasOnlyDigitsRegExp = /^\d+$/;
+
+    if (hasOnlyDigitsRegExp.test(fieldValue)) {
+      field.setCustomValidity('Value can not consist only of numbers!');
+      return;
+    }
+    field.setCustomValidity('');
+
+    const hasForbiddenSymbolsRegExp = /[ ~ ! @ # $ % * () _ — + = | : ; " ' ` < > , . ? / ^ ]/;
+
+    if (hasForbiddenSymbolsRegExp.test(fieldValue)) {
+      field.setCustomValidity(
+        'Value can not include specific symbols such as @ # % = * > / and others!',
+      );
+      return;
+    }
+    field.setCustomValidity('');
+  }
+
+  static submitForm(firstName: string, lastName: string, email: string): void {
+    const user = new User(firstName, lastName, email);
+  }
 
   render(): HTMLElement {
-    this.root.innerHTML = `    <form class="register_form">
+    this.root.innerHTML = `<form id="regForm"class="register_form">
     <p class="title reg_form_title">Register new player</p>
     <div class="form-conteiner">
       <div class="form-content">
@@ -22,8 +54,6 @@ export default class RegistrationForm implements Component {
             name="firstName"
             placeholder="First name"
             required
-            minlength="1"
-            maxlength="30"
           />
           <input
             class="reg_input"
@@ -32,18 +62,14 @@ export default class RegistrationForm implements Component {
             name="lastName"
             placeholder="Last name"
             required
-            minlength="1"
-            maxlength="30"
           />
           <input
             class="reg_input"
             type="email"
             id="email"
-            name="email"
+            name="this.email"
             placeholder="Email"
             required
-            minlength="1"
-            maxlength="30"
           />
         </div>
         <div class="avatar-container"></div>
@@ -58,8 +84,15 @@ export default class RegistrationForm implements Component {
     const firstNameField = <HTMLInputElement>document.querySelector('#firstName');
     const lastNameField = <HTMLInputElement>document.querySelector('#lastName');
     const emailField = <HTMLInputElement>document.querySelector('#email');
+    const form = document.querySelector('#regForm');
 
-    firstNameField.addEventListener('input', () => this.checkFirstName(firstNameField.value));
+    firstNameField.addEventListener('input', () => RegistrationForm.checkName(firstNameField));
+    lastNameField.addEventListener('input', () => RegistrationForm.checkName(lastNameField));
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      RegistrationForm.submitForm(firstNameField.value, lastNameField.value, emailField.value);
+    });
 
     return this.application;
   }
