@@ -29,7 +29,7 @@ export default class UserDao {
       console.log('error: ');
     };
 
-    openRequest.addEventListener('error');
+    // openRequest.addEventListener('error');
   }
 }
 // public addUser(user: User): void {
