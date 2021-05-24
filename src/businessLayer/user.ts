@@ -28,7 +28,7 @@ export default class User {
   }
 
   get email() {
-    return this.currentLastName;
+    return this.currentEmail;
   }
 
   set email(newEmail: string) {

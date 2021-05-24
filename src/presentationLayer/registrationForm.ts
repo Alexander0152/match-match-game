@@ -1,5 +1,7 @@
+import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
 import { Component, RootElement } from '../businessLayer/app.api';
 import User from '../businessLayer/user';
+import UserService from '../serviceLayer/userService';
 
 export default class RegistrationForm implements Component {
   private readonly application: HTMLDivElement;
@@ -39,6 +41,10 @@ export default class RegistrationForm implements Component {
 
   static submitForm(firstName: string, lastName: string, email: string): void {
     const user = new User(firstName, lastName, email);
+
+    const dbName = UserDbConfig.databaseName;
+    const dbVersion = UserDbConfig.databaseVersion;
+    UserService.addUser(dbName, dbVersion, user);
   }
 
   render(): HTMLElement {
@@ -67,7 +73,7 @@ export default class RegistrationForm implements Component {
             class="reg_input"
             type="email"
             id="email"
-            name="this.email"
+            name="email"
             placeholder="Email"
             required
           />

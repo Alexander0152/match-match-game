@@ -5,54 +5,46 @@ export default class UserDao {
 
   private dbVersion: number;
 
+  private dBOpenRequest: IDBOpenDBRequest;
+
+  private db: IDBDatabase;
+
+  private objectStore: IDBObjectStore;
+
+  private transaction: IDBTransaction;
+
   constructor(newDbName: string, newDbVersion: number) {
     this.dbName = newDbName;
     this.dbVersion = newDbVersion;
   }
 
   public addUser(user: User): void {
-    const openRequest = indexedDB.open(this.dbName, this.dbVersion);
+    this.dBOpenRequest = window.indexedDB.open(this.dbName, this.dbVersion);
 
-    // prefixes of implementation that we want to test
-    indexedDB = window.indexedDB;
+    this.dBOpenRequest.addEventListener('upgradeneeded', (event) => {
+      this.db = (event.target as IDBOpenDBRequest).result;
 
-    // prefixes of window.IDB objects
-    // window.IDBTransaction =
-    //   window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-    // window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+      // Create an objectStore for this database
+      this.objectStore = this.db.createObjectStore('users', { keyPath: 'email' });
 
-    if (!window.indexedDB) {
-      window.alert("Your browser doesn't support a stable version of IndexedDB.");
-    }
+      // define what data items the objectStore will contain
+      this.objectStore.createIndex('firstName', 'firstName', { unique: false });
+      this.objectStore.createIndex('lastName', 'lastName', { unique: false });
+      this.objectStore.createIndex('email', 'email', { unique: false });
+    });
 
-    openRequest.onerror = function (event) {
-      console.log('error: ');
-    };
+    this.dBOpenRequest.addEventListener('success', () => {
+      this.db = this.dBOpenRequest.result;
 
-    // openRequest.addEventListener('error');
+      this.transaction = this.db.transaction([this.dbName], 'readwrite');
+      this.objectStore = this.transaction.objectStore(this.dbName);
+
+      const newUser = {
+        firsName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      };
+      this.objectStore.add(newUser);
+    });
   }
 }
-// public addUser(user: User): void {
-//     let openRequest = indexedDB.open(this.dbName, this.dbVersion);
-
-//     let db;
-//     const dbReq = indexedDB.open('myDB', 1);
-
-//     dbReq.onupgradeneeded = (event) => {
-//       // Зададим переменной db ссылку на базу данных
-//       db = event.target.result;
-//       // Создадим хранилище объектов с именем notes.
-//       let users = db.createObjectStore('users', { autoIncrement: true });
-//     };
-//     dbReq.onsuccess = (event) => {
-//       db = event.target.result;
-//     };
-//     dbReq.onerror = (event) => {
-//       alert('error opening database ' + event.target.errorCode);
-//     };
-
-//     dbReq.onsuccess = (event) => {
-//       db = event.target.result;
-//       addStickyNote(db, 'Hello world first time!');
-//     };
-//   }
