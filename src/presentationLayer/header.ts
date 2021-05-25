@@ -1,4 +1,5 @@
 import { Component, RootElement } from '../businessLayer/app.api';
+// import img from '../assets/images/dog1.png';
 
 export default class Header implements Component {
   private readonly application: HTMLDivElement;

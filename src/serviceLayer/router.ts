@@ -2,7 +2,7 @@ import { RouterOptions } from '../businessLayer/app.api';
 import GameSettings from '../presentationLayer/gameSettings';
 import HowToPlay from '../presentationLayer/howToPlay';
 import RegistrationForm from '../presentationLayer/registrationForm';
-import BestScore from './bestScore';
+import BestScore from '../presentationLayer/bestScore';
 
 class Router {
   private readonly application: HTMLDivElement;
