@@ -1,140 +1,116 @@
-import { RouterOptions } from '../businessLayer/app.api';
 import GameSettings from '../presentationLayer/gameSettings';
 import HowToPlay from '../presentationLayer/howToPlay';
 import RegistrationForm from '../presentationLayer/registrationForm';
 import BestScore from '../presentationLayer/bestScore';
 
-class Router {
+export default class Router {
   private readonly application: HTMLDivElement;
 
   tabs = document.getElementsByClassName('tab');
 
+  routes: { path: string; cb: () => {} }[] = [];
+
+  currentRoute: string;
+
+  timerId: number;
+
   constructor(private readonly root: Element) {
     this.application = document.createElement('div');
+
+    this.add('/game_settings', () => new GameSettings(this.root).render())
+      .add('/best_score', () => new BestScore(this.root).render())
+      .add('/about_game', () => new HowToPlay(this.root).render())
+      .add('/registry', () => new RegistrationForm(this.root).render());
+
+    this.listen();
   }
 
-  // routes = {
-  //   '/about_game': new RegistrationForm(this.root).render(),
-  //   '/best_score': `<h1>Best</h1>`,
-  //   '/game_settings': `<h1>Settings</h1>`,
-  // };
-
-  changeActive(pathname: string) {
+  changeActive(path: string) {
     for (let i = 0; i < this.tabs.length; i += 1) {
       this.tabs[i].classList.remove('navbar_active');
     }
-    document.querySelector(`a[href='${pathname}']`).classList.add('navbar_active');
+    document.querySelector(`a[href='/#${path}']`).classList.add('navbar_active');
   }
 
-  onNavigate = (pathname: string) => {
-    // window.history.pushState(null, null, '#' + pathname);
+  add = (path: string, cb: () => {}) => {
+    this.routes.push({ path, cb });
+    return this;
+  };
 
-    switch (pathname) {
-      case '/#/about_game':
-        new HowToPlay(this.root).render();
-        break;
-      case '/#/best_score':
-        new BestScore(this.root).render();
-        break;
-      case '/#/game_settings':
-        new GameSettings(this.root).render();
-        break;
-      default:
-        new RegistrationForm(this.root).render();
-        break;
-    }
-    this.changeActive(pathname);
+  getFragment = () => {
+    const match = window.location.href.match(/#(.*)$/);
+    return match ? match[1] : '';
+  };
 
-    // window.onpopstate = () => {
-    //   new HowToPlay(this.root).render();
-    //   // this.getRoute(window.location.origin);
-    // };
-    // return this.application;
+  navigate = (path = '') => {
+    const newPath = path.substring(2); // cut off `/#`
+    window.location.href = `${window.location.href.replace(/#(.*)$/, '')}#${newPath}`;
+    this.changeActive(newPath);
+    return this;
+  };
+
+  listen = () => {
+    clearInterval(this.timerId);
+    this.timerId = window.setInterval(() => this.interval(), 50);
+  };
+
+  interval = (): void => {
+    if (this.currentRoute === this.getFragment()) return;
+    this.currentRoute = this.getFragment();
+
+    this.routes.some((route) => {
+      const match = this.currentRoute.match(route.path);
+      if (match) {
+        match.shift();
+        route.cb.apply({}, match);
+        this.changeActive(route.path);
+        return match;
+      }
+      return false;
+    });
   };
 }
 
-export default Router;
+// class Router {
+//   private readonly application: HTMLDivElement;
 
-//   routes: { path: string; cb: () => {} }[] = [];
+//   tabs = document.getElementsByClassName('tab');
 
-//   mode: string = null;
-
-//   root = '/';
-
-//   current: string;
-
-//   timerId: number;
-//   //   timerId: NodeJS.Timeout;
-
-//   constructor(options: RouterOptions) {
-//     this.mode = window.history.pushState ? 'history' : 'hash';
-//     if (options.mode) this.mode = options.mode;
-//     if (options.root) this.root = options.root;
-//     this.listen();
+//   constructor(private readonly root: Element) {
+//     this.application = document.createElement('div');
 //   }
 
-//   add = (path: string, cb: () => {}) => {
-//     this.routes.push({ path, cb });
-//     return this;
-//   };
-
-//   remove = (path: string) => {
-//     for (let i = 0; i < this.routes.length; i += 1) {
-//       if (this.routes[i].path === path) {
-//         this.routes.slice(i, 1);
-//         return this;
-//       }
+//   changeActive(pathname: string) {
+//     for (let i = 0; i < this.tabs.length; i += 1) {
+//       this.tabs[i].classList.remove('navbar_active');
 //     }
-//     return this;
-//   };
+//     document.querySelector(`a[href='${pathname}']`).classList.add('navbar_active');
+//   }
 
-//   flush = () => {
-//     this.routes = [];
-//     return this;
-//   };
+//   onNavigate = (pathname: string) => {
+//     // window.history.pushState(null, null, '#' + pathname);
 
-//   clearSlashes = (path: string) => path.replace(/\/$/, '').replace(/^\//, '');
-
-//   getFragment = () => {
-//     let fragment = '';
-//     if (this.mode === 'history') {
-//       fragment = this.clearSlashes(decodeURI(window.location.pathname + window.location.search));
-//       fragment = fragment.replace(/\?(.*)$/, '');
-//       fragment = this.root !== '/' ? fragment.replace(this.root, '') : fragment;
-//     } else {
-//       const match = window.location.href.match(/#(.*)$/);
-//       fragment = match ? match[1] : '';
+//     switch (pathname) {
+//       case '/#/about_game':
+//         new HowToPlay(this.root).render();
+//         break;
+//       case '/#/best_score':
+//         new BestScore(this.root).render();
+//         break;
+//       case '/#/game_settings':
+//         new GameSettings(this.root).render();
+//         break;
+//       default:
+//         new RegistrationForm(this.root).render();
+//         break;
 //     }
-//     return this.clearSlashes(fragment);
-//   };
+//     this.changeActive(pathname);
 
-//   navigate = (path = '') => {
-//     if (this.mode === 'history') {
-//       window.history.pushState(null, null, this.root + this.clearSlashes(path));
-//     } else {
-//       window.location.href = `${window.location.href.replace(/#(.*)$/, '')}#${path}`;
-//     }
-//     return this;
-//   };
-
-//   listen = () => {
-//     clearInterval(this.timerId);
-//     this.timerId = window.setInterval(() => this.interval(), 50);
-//   };
-
-//   interval = (): void => {
-//     if (this.current === this.getFragment()) return;
-//     this.current = this.getFragment();
-
-//     this.routes.some((route) => {
-//       const match = this.current.match(route.path);
-//       if (match) {
-//         match.shift();
-//         route.cb.apply({}, match);
-//         return match;
-//       }
-//       return false;
-//     });
+//     // window.onpopstate = () => {
+//     //   new HowToPlay(this.root).render();
+//     //   // this.getRoute(window.location.origin);
+//     // };
+//     // return this.application;
 //   };
 // }
 

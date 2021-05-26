@@ -15,8 +15,12 @@ const btnBestScore = document.querySelector('#btnBestScore');
 const btnGameSettings = document.querySelector('#btnGameSettings');
 const btnRegistry = document.querySelector('#btnRegistry');
 
+// function navigate(pathname: string) {
+//   new Router(content).onNavigate(pathname);
+// }
+const router = new Router(content);
 function navigate(pathname: string) {
-  new Router(content).onNavigate(pathname);
+  router.navigate(pathname);
 }
 
 btnAboutGame.addEventListener('click', () => navigate(btnAboutGame.getAttribute('href')));

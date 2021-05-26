@@ -1,33 +1,25 @@
-import { RootElement } from '../businessLayer/app.api';
+import BaseCardComponent from './base-card-component';
+import Card from './card';
 
-export default class Game {
-  private readonly application: HTMLDivElement;
+const SHOW_TIME = 15;
+export default class CardsField extends BaseCardComponent {
+  private cards: Card[] = [];
 
-  constructor(private readonly rootElement: Element) {}
+  constructor() {
+    super('div', ['cards-field']);
+  }
 
-  render(): HTMLElement {
-    this.rootElement.innerHTML = `<div class="cards-field">
-    <div class="card-container">
-      <div class="card">
-        <div class="card__front">Front</div>
-        <div class="card__back">Back</div>
-      </div>
-    </div>
+  clear() {
+    this.cards = [];
+    this.element.innerHTML = '';
+  }
 
-    <div class="card-container">
-      <div class="card">
-        <div class="card__front">Front</div>
-        <div class="card__back">Back</div>
-      </div>
-    </div>
+  addCards(cards: Card[]) {
+    this.cards = cards;
+    this.cards.forEach((card) => this.element.appendChild(card.element));
 
-    <div class="card-container">
-      <div class="card">
-        <div class="card__front">Front</div>
-        <div class="card__back">Back</div>
-      </div>
-    </div>
-  </div>`;
-    return this.application;
+    setTimeout(() => {
+      this.cards.forEach((card) => card.flipToBack());
+    }, SHOW_TIME * 1000);
   }
 }
