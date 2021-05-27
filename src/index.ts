@@ -1,3 +1,4 @@
+import App from './presentationLayer/app';
 import CardsField from './presentationLayer/cards-field';
 import Header from './presentationLayer/header';
 import HowToPlay from './presentationLayer/howToPlay';
@@ -7,7 +8,7 @@ const rootNode = document.querySelector('body');
 
 new Header(rootNode).render();
 const content = document.querySelector('#content');
-new CardsField(content).render();
+new App(content).start();
 // new HowToPlay(content).render();
 
 const btnAboutGame = document.querySelector('#btnAboutGame');

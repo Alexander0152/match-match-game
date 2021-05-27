@@ -10,7 +10,12 @@ export default class App {
   }
 
   async start() {
-    const res = await fetch('../images.json');
+    const res = await fetch('./images.json');
     const categories: ImageCategoryModel[] = await res.json();
+
+    const cat = categories[0];
+    const images = cat.images.map((name) => `${cat.category}/${name}`);
+
+    this.game.newGame(images);
   }
 }

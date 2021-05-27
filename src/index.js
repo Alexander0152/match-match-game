@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import './style.css';
 import './index.ts';
 
-// import Icon from './Switzerland.jpg';
+// import Icon from './Switzerland.jpg';z
 
 function component() {
     const element = document.createElement('div');

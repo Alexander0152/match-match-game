@@ -5,12 +5,16 @@ export default class Card extends BaseCardComponent {
 
   constructor(readonly image: string) {
     super('div', ['card-container']);
+    // alert(image);
     this.element.innerHTML = `
     <div class="card">
       <div class="card__front" style="background-image: url('./assets/images/${image}')">Front</div>
       <div class="card__back">Back</div>
     </div>
     `;
+    const myIcon = new Image();
+
+    this.element.appendChild(myIcon);
   }
 
   flipToBack() {
