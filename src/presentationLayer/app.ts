@@ -14,7 +14,8 @@ export default class App {
     const categories: ImageCategoryModel[] = await res.json();
 
     const cat = categories[0];
-    const images = cat.images.map((name) => `${cat.category}/${name}`);
+    const images = cat.images.map((name) => `${name}`);
+    // const images = cat.images.map((name) => `${cat.category}/${name}`);
 
     this.game.newGame(images);
   }
