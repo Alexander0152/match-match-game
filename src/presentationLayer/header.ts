@@ -42,6 +42,7 @@ export default class Header implements Component {
       </div>
     </div>
   </header>
+  <section id="timer"></section>
   <section id="content"></section>`;
     if (this.root) {
       this.root.appendChild(this.application);

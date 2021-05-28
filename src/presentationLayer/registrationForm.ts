@@ -2,6 +2,7 @@ import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
 import { Component, RootElement } from '../businessLayer/app.api';
 import User from '../businessLayer/user';
 import UserService from '../serviceLayer/userService';
+import ModalStartGame from './modalStartGame';
 
 export default class RegistrationForm implements Component {
   private readonly application: HTMLDivElement;
@@ -85,7 +86,8 @@ export default class RegistrationForm implements Component {
         <button type="reset" class="btn_cansel">CANCEL</button>
       </div>
     </div>
-  </form>`;
+  </form>
+  <div class="new_modal" id='modalBox'>`;
 
     const firstNameField = <HTMLInputElement>document.querySelector('#firstName');
     const lastNameField = <HTMLInputElement>document.querySelector('#lastName');
@@ -98,6 +100,9 @@ export default class RegistrationForm implements Component {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       RegistrationForm.submitForm(firstNameField.value, lastNameField.value, emailField.value);
+
+      const modalBox = document.querySelector('#modalBox');
+      new ModalStartGame(modalBox).show();
     });
 
     return this.application;

@@ -19,8 +19,8 @@ export default class Card extends BaseCardComponent {
     `;
   }
 
-  static importAllImages(r: unknown) {
-    return (r as any).keys().map(r);
+  static importAllImages(r: __WebpackModuleApi.RequireContext) {
+    return r.keys().map(r);
   }
 
   flipToBack() {

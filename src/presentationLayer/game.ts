@@ -3,7 +3,7 @@ import BaseCardComponent from './base-card-component';
 import Card from './card';
 import CardsField from './cards-field';
 
-const FLIP_DELAY = 3000;
+const FLIP_DELAY = 1500;
 
 export default class Game extends BaseCardComponent {
   private readonly cardsField: CardsField;
@@ -47,8 +47,18 @@ export default class Game extends BaseCardComponent {
     }
 
     if (this.activeCard.image !== card.image) {
+      this.activeCard.element.classList.add('wrong_card');
+      card.element.classList.add('wrong_card');
       await delay(FLIP_DELAY);
+      this.activeCard.element.classList.remove('wrong_card');
+      card.element.classList.remove('wrong_card');
       await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
+    } else {
+      this.activeCard.element.classList.add('right_card');
+      card.element.classList.add('right_card');
+      await delay(FLIP_DELAY);
+      this.activeCard.element.classList.remove('right_card');
+      card.element.classList.remove('right_card');
     }
     this.activeCard = undefined;
     this.isAnimation = false;

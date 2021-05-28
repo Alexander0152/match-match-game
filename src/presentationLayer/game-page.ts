@@ -1,11 +1,18 @@
 import ImageCategoryModel from '../businessLayer/image-category-model';
 import Game from './game';
+import StartGameModal from './modalStartGame';
+import Timer from './timer';
 
-export default class App {
+export default class GamePage {
   private readonly game: Game;
+
+  private readonly timer: Element;
 
   constructor(private readonly rootElement: Element) {
     this.game = new Game();
+
+    this.timer = document.querySelector('#content');
+    new Timer(this.timer).startTimer();
     this.rootElement.appendChild(this.game.element);
   }
 

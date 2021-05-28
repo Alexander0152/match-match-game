@@ -1,4 +1,4 @@
 export default {
-  databaseName: 'users',
+  databaseName: 'Alexander0152',
   databaseVersion: 4,
 };

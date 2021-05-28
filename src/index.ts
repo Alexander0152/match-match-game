@@ -1,15 +1,18 @@
-import App from './presentationLayer/app';
+import GamePage from './presentationLayer/game-page';
 import CardsField from './presentationLayer/cards-field';
 import Header from './presentationLayer/header';
 import HowToPlay from './presentationLayer/howToPlay';
 import Router from './serviceLayer/router';
+import Timer from './presentationLayer/timer';
+import StartGameModal from './presentationLayer/modalStartGame';
 
 const rootNode = document.querySelector('body');
 
 new Header(rootNode).render();
 const content = document.querySelector('#content');
-new App(content).start();
-// new HowToPlay(content).render();
+// new Timer(content).startTimer();
+// new GamePage(content).start();
+new HowToPlay(content).render();
 
 const btnAboutGame = document.querySelector('#btnAboutGame');
 const btnBestScore = document.querySelector('#btnBestScore');

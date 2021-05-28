@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
 body {
   font-family: Roboto;
+  background-color: #155ccf57;
 }
 
 header {
@@ -198,6 +199,15 @@ button {
   height: 230px;
   margin-top: -69px;
 }
+
+.game_picture {
+  background-image: url(assets/images/game_image.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 230px;
+  margin-right: -22px;
+}
 /******REGISTRY FORM***************/
 
 .register_form {
@@ -336,19 +346,24 @@ input:valid {
 }
 
 /**GAME FIELD*********************/
+.game-container {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .cards-field {
-  width: 70%;
-  margin: 0 auto;
+  width: 40%;
+  margin: 20px auto;
   padding: 0;
   min-height: 100hv;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
 
   flex-direction: row;
   flex-wrap: wrap;
   perspective: 25rem;
+  padding: 20px;
 }
 
 .card-container {
@@ -368,15 +383,18 @@ input:valid {
 
 .card {
   position: relative;
-  width: 10rem;
-  height: 12rem;
+  width: 148px;
+  height: 148px;
+  /* width: 10rem;
+  height: 12rem; */
   cursor: pointer;
 
   transform-style: preserve-3d;
   transform-origin: right;
-  transition: all 0.5s;
+  transition: all 0.3s;
   box-shadow: 0 0.1rem 0.25rem black;
   border-radius: 0.5rem;
+  background-color: #1e88e585;
 }
 
 .card__front {
@@ -412,4 +430,149 @@ input:valid {
 .flipped .card {
   transform: rotateY(180deg) translateX(-100%);
   transform-origin: left;
+}
+
+.wrong_card .card {
+  background-color: red;
+}
+
+.right_card .card {
+  background-color: #6ed407;
+}
+
+/**** TIMER *********************/
+
+.timer-container {
+  position: absolute;
+  top: 30px;
+  width: 256px;
+  height: 64px;
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+/* body {
+  font-family: sans-serif;
+  display: grid;
+  height: 100vh;
+  place-items: center;
+} */
+
+.base-timer {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/**** MODAL WINDOW *****************/
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+  background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+  /* height: 10%; */
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.modal_hint {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.modal_btn {
+  width: 135px;
+  height: 36px;
+  background-color: #f2f9fe;
+  color: #2196f3;
+  font-style: Medium;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

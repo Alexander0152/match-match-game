@@ -42,6 +42,7 @@ export default class HowToPlay implements Component {
           Start you new game! Remember card positions and match it before times up.
         </p>
       </div>
+      <div class="picture_block game_picture"></div>
     </section>
   </div>`;
     return this.application;
