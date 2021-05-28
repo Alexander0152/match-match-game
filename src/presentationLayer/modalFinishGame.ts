@@ -40,8 +40,8 @@ export default class ModalStartGame {
 
     const regForm: HTMLDivElement = document.querySelector('#regForm');
     const content = document.querySelector('#content');
-    regForm.style.display = 'none';
 
+    regForm.style.display = 'none';
     new GamePage(content).start();
   }
 

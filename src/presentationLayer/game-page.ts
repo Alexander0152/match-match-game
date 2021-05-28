@@ -1,6 +1,5 @@
 import ImageCategoryModel from '../businessLayer/image-category-model';
 import Game from './game';
-import StartGameModal from './modalStartGame';
 import Timer from './timer';
 
 export default class GamePage {
