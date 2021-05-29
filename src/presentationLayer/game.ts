@@ -2,6 +2,7 @@ import delay from '../businessLayer/delay';
 import BaseCardComponent from './base-card-component';
 import Card from './card';
 import CardsField from './cards-field';
+import ModalStartGame from './modalFinishGame';
 
 const FLIP_DELAY = 1000;
 
@@ -77,6 +78,7 @@ export default class Game extends BaseCardComponent {
         return;
       }
     }
-    alert('Congratulations!!!');
+    const content = document.querySelector('#content');
+    new ModalStartGame(content).show();
   }
 }

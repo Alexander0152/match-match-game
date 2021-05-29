@@ -1,4 +1,4 @@
 export default {
-  databaseName: 'Alexander0152',
+  databaseName: 'alexander0152-JSFE2021Q1',
   databaseVersion: 4,
 };

@@ -15,7 +15,6 @@ export default class ModalStartGame {
     this.root.innerHTML = `
           <div id="modalStartGame" class="modal">
              <div class="modal-content">
-               <span class="close">&times;</span>
                <p>New game</p>
                <p class="modal_hint">Press start to play the game...</p>
                <button class="modal_btn" id="backBtn">Back</button>

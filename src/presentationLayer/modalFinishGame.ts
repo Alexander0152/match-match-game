@@ -1,48 +1,46 @@
-// import img from '../assets/images/dog1.png';
-
-import GamePage from './game-page';
+import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
+import UserService from '../serviceLayer/userService';
 
 export default class ModalStartGame {
   modalWindow: HTMLDivElement;
 
-  startGameBtn: HTMLDivElement;
+  closeGameBtn: HTMLDivElement;
 
   backBtn: HTMLDivElement;
 
-  // btnBestScore = document.querySelector('#btnBestScore');
-
   constructor(private readonly root: Element) {
     this.root.innerHTML = `
-          <div id="modalStartGame" class="modal">
+          <div id="modalFinishGame" class="modal">
              <div class="modal-content">
-               <span class="close">&times;</span>
-               <p>New game</p>
-               <p class="modal_hint">Press start to play the game...</p>
-               <button class="modal_btn" id="backBtn">Back</button>
-               <button class="modal_btn" id="startGameBtn">Start</button>
+               <p>Congratulations!</p>
+               <button class="modal_btn" id="closeGameBtn">Close</button>
              </div>
          </div>`;
 
-    this.modalWindow = document.querySelector('#modalStartGame');
-    this.backBtn = document.querySelector('#backBtn');
-    this.startGameBtn = document.querySelector('#startGameBtn');
+    ModalStartGame.addUser();
 
-    this.backBtn.addEventListener('click', () => this.back());
-    this.startGameBtn.addEventListener('click', () => this.startGame());
+    this.modalWindow = document.querySelector('#modalFinishGame');
+    this.closeGameBtn = document.querySelector('#closeGameBtn');
+
+    this.closeGameBtn.addEventListener('click', () => this.closeGame());
   }
 
-  back() {
-    this.modalWindow.style.display = 'none';
+  static addUser() {
+    // const user = localStorage.getItem('user');
+    const retrievedUser = localStorage.getItem('newUser');
+    const newUser = JSON.parse(retrievedUser);
+
+    const dbName = UserDbConfig.databaseName;
+    const dbVersion = UserDbConfig.databaseVersion;
+
+    UserService.addUser(dbName, dbVersion, newUser);
   }
 
-  startGame() {
+  closeGame() {
     this.modalWindow.style.display = 'none';
 
-    const regForm: HTMLDivElement = document.querySelector('#regForm');
-    const content = document.querySelector('#content');
-
-    regForm.style.display = 'none';
-    new GamePage(content).start();
+    const score = document.querySelector('#btnBestScore');
+    (score as HTMLDivElement).click();
   }
 
   show(): void {

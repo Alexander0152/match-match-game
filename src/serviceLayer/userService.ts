@@ -6,4 +6,9 @@ export default class UserService {
     const userDao: UserDao = new UserDao(dbName, dbVersion);
     userDao.addUser(user);
   }
+
+  public static getAllUsers(dbName: string, dbVersion: number): User[] {
+    const userDao: UserDao = new UserDao(dbName, dbVersion);
+    return userDao.getAllUsers();
+  }
 }

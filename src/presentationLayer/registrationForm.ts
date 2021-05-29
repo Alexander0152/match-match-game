@@ -40,12 +40,10 @@ export default class RegistrationForm implements Component {
     field.setCustomValidity('');
   }
 
-  static submitForm(firstName: string, lastName: string, email: string): void {
-    const user = new User(firstName, lastName, email);
+  static submitForm(newFirstName: string, newLastName: string, newEmail: string): void {
+    const newUser = { firstName: newFirstName, lastName: newLastName, email: newEmail };
 
-    const dbName = UserDbConfig.databaseName;
-    const dbVersion = UserDbConfig.databaseVersion;
-    UserService.addUser(dbName, dbVersion, user);
+    localStorage.setItem('newUser', JSON.stringify(newUser));
   }
 
   render(): HTMLElement {

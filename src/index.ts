@@ -5,6 +5,7 @@ import HowToPlay from './presentationLayer/howToPlay';
 import Router from './serviceLayer/router';
 import Timer from './presentationLayer/timer';
 import StartGameModal from './presentationLayer/modalStartGame';
+import BestScore from './presentationLayer/bestScore';
 
 const rootNode = document.querySelector('body');
 
@@ -12,7 +13,9 @@ new Header(rootNode).render();
 const content = document.querySelector('#content');
 // new Timer(content).startTimer();
 // new GamePage(content).start();
-new HowToPlay(content).render();
+// new HowToPlay(content).render();
+const t = new BestScore(content);
+setTimeout(() => t.render(), 1000);
 
 const btnAboutGame = document.querySelector('#btnAboutGame');
 const btnBestScore = document.querySelector('#btnBestScore');

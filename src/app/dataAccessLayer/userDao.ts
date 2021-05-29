@@ -36,8 +36,8 @@ export default class UserDao {
     this.dBOpenRequest.addEventListener('success', () => {
       this.db = this.dBOpenRequest.result;
 
-      this.transaction = this.db.transaction([this.dbName], 'readwrite');
-      this.objectStore = this.transaction.objectStore(this.dbName);
+      this.transaction = this.db.transaction(['users'], 'readwrite');
+      this.objectStore = this.transaction.objectStore('users');
 
       const newUser = {
         firsName: user.firstName,
@@ -46,5 +46,46 @@ export default class UserDao {
       };
       this.objectStore.add(newUser);
     });
+  }
+
+  public getAllUsers(): User[] {
+    this.dBOpenRequest = window.indexedDB.open(this.dbName, this.dbVersion);
+
+    const userList: User[] = [];
+
+    this.dBOpenRequest.addEventListener('upgradeneeded', (event) => {
+      this.db = (event.target as IDBOpenDBRequest).result;
+
+      // Create an objectStore for this database
+      this.objectStore = this.db.createObjectStore('users', { keyPath: 'email' });
+
+      // define what data items the objectStore will contain
+      this.objectStore.createIndex('firstName', 'firstName', { unique: false });
+      this.objectStore.createIndex('lastName', 'lastName', { unique: false });
+      this.objectStore.createIndex('email', 'email', { unique: false });
+    });
+
+    this.dBOpenRequest.addEventListener('success', () => {
+      this.db = this.dBOpenRequest.result;
+
+      this.transaction = this.db.transaction(['users'], 'readonly');
+      this.objectStore = this.transaction.objectStore('users');
+      const showCursor = this.objectStore.openCursor();
+
+      showCursor.onsuccess = function (event) {
+        const cursor: IDBCursorWithValue = (event.target as any).result;
+
+        if (cursor) {
+          const newUser = new User(
+            cursor.value.firsName,
+            cursor.value.lastName,
+            cursor.value.email,
+          );
+          userList.push(newUser);
+          cursor.continue();
+        }
+      };
+    });
+    return userList;
   }
 }
