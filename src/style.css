@@ -44,6 +44,10 @@ button {
   border-radius: 5px;
 }
 
+.btn_hidden {
+  display: none;
+}
+
 .navbar {
   display: flex;
   width: 288px;

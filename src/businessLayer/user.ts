@@ -5,10 +5,13 @@ export default class User {
 
   currentEmail: string;
 
-  constructor(newFirstName: string, newLastName: string, newEmail: string) {
+  currentScore: string;
+
+  constructor(newFirstName: string, newLastName: string, newEmail: string, newScore: string) {
     this.currentFirstName = newFirstName;
     this.currentLastName = newLastName;
     this.currentEmail = newEmail;
+    this.currentScore = newScore;
   }
 
   get firstName() {
@@ -33,5 +36,13 @@ export default class User {
 
   set email(newEmail: string) {
     this.currentEmail = newEmail;
+  }
+
+  get score() {
+    return this.currentScore;
+  }
+
+  set score(newScore: string) {
+    this.currentScore = newScore;
   }
 }

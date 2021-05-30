@@ -5,13 +5,16 @@ import Timer from './timer';
 export default class GamePage {
   private readonly game: Game;
 
-  private readonly timer: Element;
+  private readonly timerContainer: Element;
+
+  private timer: Timer;
 
   constructor(private readonly rootElement: Element) {
     this.game = new Game();
 
-    this.timer = document.querySelector('#content');
-    new Timer(this.timer).startTimer();
+    this.timerContainer = document.querySelector('#content');
+    this.timer = new Timer(this.timerContainer);
+    this.timer.startWathingTimer();
     this.rootElement.appendChild(this.game.element);
   }
 
@@ -23,6 +26,6 @@ export default class GamePage {
     const images = cat.images.map((name) => `${name}`);
     // const images = cat.images.map((name) => `${cat.category}/${name}`);
 
-    this.game.newGame(images);
+    this.game.newGame(images, this.timer);
   }
 }

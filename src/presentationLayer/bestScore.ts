@@ -12,7 +12,7 @@ export default class BestScore implements Component {
 
   constructor(private readonly root: RootElement) {
     this.getUsersHistory();
-    this.application = document.createElement('div');
+    // this.application = document.createElement('div');
   }
 
   getUsersHistory() {
@@ -20,23 +20,25 @@ export default class BestScore implements Component {
     const dbVersion = UserDbConfig.databaseVersion;
 
     this.usersList = UserService.getAllUsers(dbName, dbVersion);
-    // console.log(this.usersList[0]);
   }
 
-  render(): HTMLElement {
+  renderRecords() {
     const recordsField = document.createElement('div');
     recordsField.innerHTML = `
     <div id="recordsField" class="records-field"></div>
     `;
 
     for (let i = 0; i < 10; i += 1) {
+      if (!this.usersList[i]) {
+        break;
+      }
       const newRecord = document.createElement('div');
       newRecord.innerHTML = `
          <div class="record">
-           <p class="record_name">${this.usersList[0].firstName}</p>
-           <p class="record_name">${this.usersList[0].lastName}</p>
-           <p class="record_email">${this.usersList[0].email}</p>
-           <p class="record_score">Score:</p>
+           <p class="record_name">${this.usersList[i].firstName}</p>
+           <p class="record_name">${this.usersList[i].lastName}</p>
+           <p class="record_email">${this.usersList[i].email}</p>
+           <p class="record_score">Score: ${this.usersList[i].score}</p>
          </div>`;
 
       recordsField.appendChild(newRecord);
@@ -44,10 +46,15 @@ export default class BestScore implements Component {
 
     this.root.innerHTML = `<section class="score">
       <p class="title">Best Players</p>
+      ${recordsField.innerHTML}
       <div id="recordsField" class="records-field"></div>
     </section>`;
+  }
 
-    this.root.appendChild(recordsField);
+  render(): HTMLElement {
+    this.getUsersHistory();
+
+    setTimeout(() => this.renderRecords(), 200);
     return this.application;
   }
 }

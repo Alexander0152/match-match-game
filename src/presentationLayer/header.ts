@@ -37,8 +37,10 @@ export default class Header implements Component {
           </a>
         </ul>
         <a id="btnRegistry" href="/#/registry">
-        <button class="btn_register">REGISTER NEW PLAYER</button>
+        <button id="btnRegisterNewPlayer" class="btn_register">REGISTER NEW PLAYER</button>
         </a>
+        <button id="btnStartGame" class="btn_register btn_hidden">START GAME</button>
+        <button id="btnStopGame" class="btn_register btn_hidden">STOP GAME</button>
       </div>
     </div>
   </header>

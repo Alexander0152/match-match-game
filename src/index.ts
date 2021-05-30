@@ -13,9 +13,10 @@ new Header(rootNode).render();
 const content = document.querySelector('#content');
 // new Timer(content).startTimer();
 // new GamePage(content).start();
-// new HowToPlay(content).render();
-const t = new BestScore(content);
-setTimeout(() => t.render(), 1000);
+new HowToPlay(content).render();
+
+// const t = new BestScore(content);
+// setTimeout(() => t.render(), 500);
 
 const btnAboutGame = document.querySelector('#btnAboutGame');
 const btnBestScore = document.querySelector('#btnBestScore');

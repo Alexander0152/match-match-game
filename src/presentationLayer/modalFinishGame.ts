@@ -8,16 +8,18 @@ export default class ModalStartGame {
 
   backBtn: HTMLDivElement;
 
-  constructor(private readonly root: Element) {
+  constructor(private readonly root: Element, time: string, score: string) {
     this.root.innerHTML = `
           <div id="modalFinishGame" class="modal">
              <div class="modal-content">
                <p>Congratulations!</p>
+               <p>Your time: ${time} seconds</p>
+               <p>Your score: ${score} points</p>
                <button class="modal_btn" id="closeGameBtn">Close</button>
              </div>
          </div>`;
 
-    ModalStartGame.addUser();
+    ModalStartGame.addUser(score);
 
     this.modalWindow = document.querySelector('#modalFinishGame');
     this.closeGameBtn = document.querySelector('#closeGameBtn');
@@ -25,11 +27,12 @@ export default class ModalStartGame {
     this.closeGameBtn.addEventListener('click', () => this.closeGame());
   }
 
-  static addUser() {
+  static addUser(score: string) {
     // const user = localStorage.getItem('user');
     const retrievedUser = localStorage.getItem('newUser');
     const newUser = JSON.parse(retrievedUser);
 
+    newUser.score = score;
     const dbName = UserDbConfig.databaseName;
     const dbVersion = UserDbConfig.databaseVersion;
 
@@ -45,5 +48,10 @@ export default class ModalStartGame {
 
   show(): void {
     this.modalWindow.style.display = 'block';
+    const btnStopGame: HTMLButtonElement = document.querySelector('#btnStopGame');
+    btnStopGame.style.display = 'none';
+
+    const btnRegister: HTMLButtonElement = document.querySelector('#btnRegisterNewPlayer');
+    btnRegister.style.display = 'initial';
   }
 }

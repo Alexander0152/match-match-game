@@ -31,6 +31,7 @@ export default class UserDao {
       this.objectStore.createIndex('firstName', 'firstName', { unique: false });
       this.objectStore.createIndex('lastName', 'lastName', { unique: false });
       this.objectStore.createIndex('email', 'email', { unique: false });
+      this.objectStore.createIndex('score', 'score', { unique: false });
     });
 
     this.dBOpenRequest.addEventListener('success', () => {
@@ -43,6 +44,7 @@ export default class UserDao {
         firsName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        score: user.score,
       };
       this.objectStore.add(newUser);
     });
@@ -63,6 +65,7 @@ export default class UserDao {
       this.objectStore.createIndex('firstName', 'firstName', { unique: false });
       this.objectStore.createIndex('lastName', 'lastName', { unique: false });
       this.objectStore.createIndex('email', 'email', { unique: false });
+      this.objectStore.createIndex('score', 'score', { unique: false });
     });
 
     this.dBOpenRequest.addEventListener('success', () => {
@@ -72,7 +75,7 @@ export default class UserDao {
       this.objectStore = this.transaction.objectStore('users');
       const showCursor = this.objectStore.openCursor();
 
-      showCursor.onsuccess = function (event) {
+      showCursor.onsuccess = (event) => {
         const cursor: IDBCursorWithValue = (event.target as any).result;
 
         if (cursor) {
@@ -80,6 +83,7 @@ export default class UserDao {
             cursor.value.firsName,
             cursor.value.lastName,
             cursor.value.email,
+            cursor.value.score,
           );
           userList.push(newUser);
           cursor.continue();

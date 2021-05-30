@@ -16,10 +16,12 @@ const COLOR_CODES = {
   },
 };
 
-const TIME_LIMIT = 30;
+const TIME_LIMIT = 4;
 
 export default class Timer {
   timePassed = 0;
+
+  gameTimePassed = 0;
 
   timeLeft = TIME_LIMIT;
 
@@ -55,36 +57,66 @@ export default class Timer {
         `;
 
     this.root.appendChild(this.timer);
+
+    // window.addEventListener('onhashchange', this.resetTimer);
+    // console.log(window.location.href);
   }
 
-  onTimesUp() {
+  // resetTimer() {
+  //   this.stopWatchingTimer();
+  //   this.stopGameProcessTimer();
+  //   alert('dd');
+  // }
+
+  stopWatchingTimer() {
     clearInterval(this.timerInterval);
+    this.timePassed = 0;
+    this.timeLeft = TIME_LIMIT;
+    this.startGameProcessTimer();
   }
 
-  startTimer() {
+  stopGameProcessTimer() {
+    clearInterval(this.timerInterval);
+    this.timePassed = 0;
+    this.timeLeft = TIME_LIMIT;
+  }
+
+  startWathingTimer() {
     this.timerInterval = window.setInterval(() => {
-      const newTime = this.timePassed + 1;
+      // const newTime = this.timePassed + 1;
       //   timePassed = timePassed += 1;
       //   timeLeft = TIME_LIMIT - timePassed;
-      this.timePassed = newTime;
+      this.timePassed += 1;
       this.timeLeft = TIME_LIMIT - this.timePassed;
       document.getElementById('base-timer-label').innerHTML = Timer.formatTime(this.timeLeft);
       this.setCircleDasharray();
       Timer.setRemainingPathColor(this.timeLeft);
 
       if (this.timeLeft === 0) {
-        this.onTimesUp();
+        this.stopWatchingTimer();
+      }
+    }, 1000);
+  }
+
+  startGameProcessTimer() {
+    this.timerInterval = window.setInterval(() => {
+      // const newTime = this.timePassed + 1;
+      this.gameTimePassed += 1;
+      document.getElementById('base-timer-label').innerHTML = `${this.gameTimePassed}`;
+
+      if (this.gameTimePassed === 600000) {
+        this.stopGameProcessTimer();
       }
     }, 1000);
   }
 
   static formatTime(time: number) {
     // const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+    // const seconds = time % 60;
     let secondsResult: string;
 
-    if (seconds < 31) {
-      secondsResult = `${seconds}`;
+    if (time < 31) {
+      secondsResult = `${time}`;
     }
 
     return `${secondsResult}`;

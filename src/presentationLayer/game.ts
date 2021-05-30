@@ -2,7 +2,8 @@ import delay from '../businessLayer/delay';
 import BaseCardComponent from './base-card-component';
 import Card from './card';
 import CardsField from './cards-field';
-import ModalStartGame from './modalFinishGame';
+import ModalFinishGame from './modalFinishGame';
+import Timer from './timer';
 
 const FLIP_DELAY = 1000;
 
@@ -15,6 +16,12 @@ export default class Game extends BaseCardComponent {
 
   private cardsList: HTMLCollection;
 
+  private timer: Timer;
+
+  private amountOfComparisons: number = 0;
+
+  private amountOfMistakes: number = 0;
+
   constructor() {
     super();
     this.cardsField = new CardsField();
@@ -22,7 +29,8 @@ export default class Game extends BaseCardComponent {
     this.cardsList = document.getElementsByClassName('card-container');
   }
 
-  newGame(images: string[]) {
+  newGame(images: string[], newTimer: Timer) {
+    this.timer = newTimer;
     this.cardsField.clear();
     const cards = images
       .concat(images)
@@ -51,6 +59,9 @@ export default class Game extends BaseCardComponent {
     }
 
     if (this.activeCard.image !== card.image) {
+      this.amountOfComparisons += 1;
+      this.amountOfMistakes += 1;
+
       this.activeCard.element.classList.add('wrong_card');
       card.element.classList.add('wrong_card');
       await delay(FLIP_DELAY);
@@ -59,6 +70,8 @@ export default class Game extends BaseCardComponent {
       card.element.classList.remove('wrong_card');
       await Promise.all([this.activeCard.flipToBack(), card.flipToBack()]);
     } else {
+      this.amountOfComparisons += 1;
+
       this.activeCard.element.classList.add('right_card');
       card.element.classList.add('right_card');
 
@@ -78,7 +91,21 @@ export default class Game extends BaseCardComponent {
         return;
       }
     }
+    this.timer.stopGameProcessTimer();
     const content = document.querySelector('#content');
-    new ModalStartGame(content).show();
+    const time: HTMLSpanElement = document.querySelector('#base-timer-label');
+
+    const score = this.calculateScore(time.innerText);
+
+    new ModalFinishGame(content, time.innerText, score.toString()).show();
+    console.log(this.amountOfComparisons, this.amountOfMistakes);
+  }
+
+  calculateScore(time: string) {
+    let result = (this.amountOfComparisons - this.amountOfMistakes) * 100 - +time * 10;
+    if (result < 0) {
+      result = 0;
+    }
+    return result;
   }
 }
