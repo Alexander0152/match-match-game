@@ -1,7 +1,7 @@
 import BaseCardComponent from './base-card-component';
 import Card from './card';
 
-const SHOW_TIME = 4;
+const SHOW_TIME = 30;
 export default class CardsField extends BaseCardComponent {
   private cards: Card[] = [];
 

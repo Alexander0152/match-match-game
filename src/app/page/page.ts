@@ -1,4 +1,4 @@
-import { Component, RootElement } from '../app.api';
+import { Component } from '../app.api';
 
 export default class Page implements Component {
   private readonly page: HTMLElement;

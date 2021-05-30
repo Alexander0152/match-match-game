@@ -1,7 +1,4 @@
-import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
 import { Component, RootElement } from '../businessLayer/app.api';
-import User from '../businessLayer/user';
-import UserService from '../serviceLayer/userService';
 import ModalStartGame from './modalStartGame';
 
 export default class RegistrationForm implements Component {

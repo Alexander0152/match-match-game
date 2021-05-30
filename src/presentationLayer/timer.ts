@@ -16,7 +16,7 @@ const COLOR_CODES = {
   },
 };
 
-const TIME_LIMIT = 4;
+const TIME_LIMIT = 30;
 
 export default class Timer {
   timePassed = 0;
