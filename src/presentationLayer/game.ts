@@ -22,6 +22,8 @@ export default class Game extends BaseCardComponent {
 
   private amountOfMistakes: number = 0;
 
+  private difficulty: string;
+
   constructor() {
     super();
     this.cardsField = new CardsField();
@@ -32,9 +34,11 @@ export default class Game extends BaseCardComponent {
   newGame(images: string[], newTimer: Timer) {
     this.timer = newTimer;
     this.cardsField.clear();
+    this.checkSettings();
+
     const cards = images
       .concat(images)
-      .map((url) => new Card(url))
+      .map((url) => new Card(url, this.difficulty))
       .sort(() => Math.random() - 0.5);
 
     cards.forEach((card) => {
@@ -42,6 +46,15 @@ export default class Game extends BaseCardComponent {
     });
 
     this.cardsField.addCards(cards);
+  }
+
+  checkSettings() {
+    const retrievedUser = localStorage.getItem('settings');
+    const settings = JSON.parse(retrievedUser);
+
+    if (settings !== null && settings.difficulty === 'hard') {
+      this.difficulty = 'hard';
+    }
   }
 
   private async cardHandler(card: Card) {
@@ -98,7 +111,6 @@ export default class Game extends BaseCardComponent {
     const score = this.calculateScore(time.innerText);
 
     new ModalFinishGame(content, time.innerText, score.toString()).show();
-    console.log(this.amountOfComparisons, this.amountOfMistakes);
   }
 
   calculateScore(time: string) {

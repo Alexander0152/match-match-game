@@ -4,15 +4,21 @@ const FLIP_CLASS = 'flipped';
 export default class Card extends BaseCardComponent {
   isFlipped = false;
 
-  constructor(readonly image: string) {
+  difficulty: string;
+
+  difficultyStyle: string;
+
+  constructor(readonly image: string, difficulty: string) {
     super('div', ['card-container']);
+    this.difficulty = difficulty;
+
     const images = Card.importAllImages(
       require.context(`../assets/images/game_images`, false, /\.(png|jpe?g|svg)$/),
     );
     const path = images[+image];
 
     this.element.innerHTML = `
-    <div class="card">
+    <div class="card ${this.difficultyStyle}">
       <div class="card__front" style="background-image: url('${path}')"></div>
       <div class="card__back"></div>
     </div>
@@ -40,5 +46,11 @@ export default class Card extends BaseCardComponent {
         once: true,
       });
     });
+  }
+
+  checkDifficulty() {
+    if (this.difficulty === 'hard') {
+      this.difficultyStyle = 'card-difficult';
+    }
   }
 }

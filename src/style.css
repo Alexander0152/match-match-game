@@ -407,6 +407,10 @@ input:valid {
   padding: 20px;
 }
 
+.cards-field-difficult {
+  width: 75%;
+}
+
 .card-container {
   margin: 1%;
   flex: 1 0 20%;
@@ -417,6 +421,9 @@ input:valid {
   perspective: 25rem;
 }
 
+.card-container-difficult {
+  flex: -1 0 20%;
+}
 .card:hover {
   transform: scale(1.1);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
@@ -438,6 +445,10 @@ input:valid {
   background-color: #1e88e585;
 }
 
+.card-difficult {
+  width: 110px;
+  height: 110px;
+}
 .card__front {
   position: absolute;
   top: 0;
