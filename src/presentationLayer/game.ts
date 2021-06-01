@@ -22,7 +22,9 @@ export default class Game extends BaseCardComponent {
 
   private amountOfMistakes: number = 0;
 
-  private difficulty: string;
+  private difficulty: string = null;
+
+  private cardsType: string = null;
 
   constructor() {
     super();
@@ -38,7 +40,7 @@ export default class Game extends BaseCardComponent {
 
     const cards = images
       .concat(images)
-      .map((url) => new Card(url, this.difficulty))
+      .map((url) => new Card(url, this.cardsType, this.difficulty))
       .sort(() => Math.random() - 0.5);
 
     cards.forEach((card) => {
@@ -49,12 +51,11 @@ export default class Game extends BaseCardComponent {
   }
 
   checkSettings() {
-    const retrievedUser = localStorage.getItem('settings');
-    const settings = JSON.parse(retrievedUser);
+    const retrievedSettings = localStorage.getItem('settings');
+    const settings = JSON.parse(retrievedSettings);
 
-    if (settings !== null && settings.difficulty === 'hard') {
-      this.difficulty = 'hard';
-    }
+    this.difficulty = settings.difficulty;
+    this.cardsType = settings.cardsType;
   }
 
   private async cardHandler(card: Card) {

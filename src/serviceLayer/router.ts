@@ -29,7 +29,7 @@ export default class Router {
     for (let i = 0; i < this.tabs.length; i += 1) {
       this.tabs[i].classList.remove('navbar_active');
     }
-    document.querySelector(`a[href='/#${path}']`).classList.add('navbar_active');
+    document.querySelector(`a[href='#${path}']`).classList.add('navbar_active');
   }
 
   add = (path: string, cb: () => {}) => {
@@ -43,9 +43,9 @@ export default class Router {
   };
 
   navigate = (path = '') => {
-    const newPath = path.substring(2); // cut off `/#`
-    window.location.href = `${window.location.href.replace(/#(.*)$/, '')}#${newPath}`;
-    this.changeActive(newPath);
+    // const newPath = path.substring(2); // cut off `/#`
+    window.location.href = `${window.location.href.replace(/#(.*)$/, '')}${path}`;
+
     return this;
   };
 

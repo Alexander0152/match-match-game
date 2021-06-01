@@ -1,4 +1,4 @@
-import User from '../../businessLayer/user';
+import User from '../businessLayer/user';
 
 export default class UserDao {
   private dbName: string;

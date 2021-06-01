@@ -22,3 +22,8 @@ btnAboutGame.addEventListener('click', () => navigate(btnAboutGame.getAttribute(
 btnBestScore.addEventListener('click', () => navigate(btnBestScore.getAttribute('href')));
 btnGameSettings.addEventListener('click', () => navigate(btnGameSettings.getAttribute('href')));
 btnRegistry.addEventListener('click', () => navigate(btnRegistry.getAttribute('href')));
+
+const defaultCardType: string = null;
+const defaultDifficulty: string = null;
+const newSettings = { cardsType: defaultCardType, difficulty: defaultDifficulty };
+localStorage.setItem('settings', JSON.stringify(newSettings));

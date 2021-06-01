@@ -8,13 +8,22 @@ export default class Card extends BaseCardComponent {
 
   difficultyStyle: string;
 
-  constructor(readonly image: string, difficulty: string) {
+  constructor(readonly image: string, cardType: string, difficulty: string) {
     super('div', ['card-container']);
     this.difficulty = difficulty;
+    this.checkSettings();
 
-    const images = Card.importAllImages(
-      require.context(`../assets/images/game_images`, false, /\.(png|jpe?g|svg)$/),
-    );
+    let images;
+    if (cardType !== null && cardType !== 'dogs') {
+      images = Card.importAllImages(
+        require.context(`../assets/images/game_images1`, false, /\.(png|jpe?g|svg)$/),
+      );
+    } else {
+      images = Card.importAllImages(
+        require.context(`../assets/images/game_images`, false, /\.(png|jpe?g|svg)$/),
+      );
+    }
+
     const path = images[+image];
 
     this.element.innerHTML = `
@@ -48,8 +57,8 @@ export default class Card extends BaseCardComponent {
     });
   }
 
-  checkDifficulty() {
-    if (this.difficulty === 'hard') {
+  checkSettings() {
+    if (this.difficulty === '6x6') {
       this.difficultyStyle = 'card-difficult';
     }
   }

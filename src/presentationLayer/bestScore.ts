@@ -1,6 +1,6 @@
 import { Component, RootElement } from '../businessLayer/app.api';
 import UserService from '../serviceLayer/userService';
-import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
+import UserDbConfig from '../dataAccessLayer/userDbConfig';
 import User from '../businessLayer/user';
 
 export default class BestScore implements Component {

@@ -1,7 +1,7 @@
-import UserDbConfig from '../app/dataAccessLayer/userDbConfig';
+import UserDbConfig from '../dataAccessLayer/userDbConfig';
 import UserService from '../serviceLayer/userService';
 
-export default class ModalStartGame {
+export default class ModalFinishGame {
   modalWindow: HTMLDivElement;
 
   closeGameBtn: HTMLDivElement;
@@ -19,7 +19,7 @@ export default class ModalStartGame {
              </div>
          </div>`;
 
-    ModalStartGame.addUser(score);
+    ModalFinishGame.addUser(score);
 
     this.modalWindow = document.querySelector('#modalFinishGame');
     this.closeGameBtn = document.querySelector('#closeGameBtn');

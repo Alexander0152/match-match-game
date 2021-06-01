@@ -37,6 +37,17 @@ export default class RegistrationForm implements Component {
     field.setCustomValidity('');
   }
 
+  static checkEmail(field: HTMLInputElement): void {
+    const fieldLength = field.value.length;
+    // const fieldValue: string = field.value;
+
+    if (fieldLength === 0 || fieldLength > 30) {
+      field.setCustomValidity('Value can not be ampty or longer then 30 symbols!');
+      return;
+    }
+    field.setCustomValidity('');
+  }
+
   static submitForm(newFirstName: string, newLastName: string, newEmail: string): void {
     const newUser = { firstName: newFirstName, lastName: newLastName, email: newEmail };
 
@@ -91,6 +102,8 @@ export default class RegistrationForm implements Component {
 
     firstNameField.addEventListener('input', () => RegistrationForm.checkName(firstNameField));
     lastNameField.addEventListener('input', () => RegistrationForm.checkName(lastNameField));
+
+    emailField.addEventListener('input', () => RegistrationForm.checkEmail(emailField));
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();

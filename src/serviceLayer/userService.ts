@@ -1,4 +1,4 @@
-import UserDao from '../app/dataAccessLayer/userDao';
+import UserDao from '../dataAccessLayer/userDao';
 import User from '../businessLayer/user';
 
 export default class UserService {
